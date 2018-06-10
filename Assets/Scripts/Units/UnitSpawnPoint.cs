@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Teams;
+
 namespace Units
 {
     [DisallowMultipleComponent]
-    public class UnitSpawnPoint : MonoBehaviour
+    public abstract class UnitSpawnPoint : MonoBehaviour
     {
-
+        [SerializeField]
+        private Team owner = null;
+        public Team Owner { get { return owner; } }
     }
 }

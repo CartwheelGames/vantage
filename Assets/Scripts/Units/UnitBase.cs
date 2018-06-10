@@ -1,20 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Teams;
+
 namespace Units
 {
     [DisallowMultipleComponent]
-    public class Unit : MonoBehaviour
+    public abstract class UnitBase : MonoBehaviour
     {
+        [SerializeField]
+        private Team owner = null;
+        public Team Owner { get { return owner; } }
         private bool isDead = false;
         public bool IsDead { get { return isDead; } }
-        [SerializeField]
-        private float speed = 1f;
         [SerializeField]
         private float armor = 0;
         private const float armorReduction = 0.1f;
         [SerializeField]
         private float maxHealth = 100f;
+        [SerializeField]
+        private Transform[] gunAttachPoints = new Transform[0];
         public float HealthPoints { get; private set; }
 
 		private void Start()
@@ -69,18 +74,6 @@ namespace Units
         protected virtual void Remove()
         {
             Destroy(gameObject);
-        }
-
-        protected void Update()
-        {
-            if (!isDead)
-            {
-                transform.Translate(Time.deltaTime * speed * Vector3.forward);
-            }
-            else
-            {
-                transform.Translate(Vector3.down);
-            }
         }
     }
 }

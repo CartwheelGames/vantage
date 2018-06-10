@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Units.Enemies
 {
-    public class Enemy : Unit
+    public class Enemy : UnitBase
     {
     }
 }

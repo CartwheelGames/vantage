@@ -20,6 +20,12 @@ namespace Projectiles
         [SerializeField]
         private GameObject deathEffect = null;
         private bool hasHit = false;
+
+        public void Setup ()
+        {
+            // TODO Apply in gun-specific modifiers via this function.
+        }
+
         private void Update()
         {
             if (!hasHit)
@@ -27,7 +33,7 @@ namespace Projectiles
                 transform.Translate(Time.deltaTime * speed * Vector3.forward);
                 if (timeAlive > lifeTime)
                 {
-                    SelfDestruct();
+                    TimeOut();
                 }
                 else
                 {
@@ -48,24 +54,24 @@ namespace Projectiles
 		{
             if (!hasHit)
             {
-                Unit hitUnit = target.gameObject.GetComponent<Unit>();
+                UnitBase hitUnit = target.gameObject.GetComponent<UnitBase>();
                 if (hitUnit != null)
                 {
                     hitUnit.TakeDamage(power);
                 }
                 SpawnDeathEffect();
 				hasHit = true;
-                Remove();
+                SelfDestruct();
             }
 		}
 
-        protected void SelfDestruct()
+        protected void TimeOut()
         {
             if (!hasHit)
             {
                 hasHit = true;
                 SpawnDeathEffect();
-                Remove();
+                SelfDestruct();
             }
         }
 
@@ -81,7 +87,7 @@ namespace Projectiles
             }           
         }
 
-        private void Remove()
+        private void SelfDestruct()
         {
             Destroy(gameObject);
         }

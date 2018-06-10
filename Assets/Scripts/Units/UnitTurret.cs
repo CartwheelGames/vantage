@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Units.Enemies
+namespace Units
 {
-    public class EnemySpawner : UnitSpawner
+    public class UnitTurret : UnitBase
     {
-
     }
 }
