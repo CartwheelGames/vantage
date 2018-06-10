@@ -20,13 +20,12 @@ public class Player : MonoBehaviour
 
 		GameObject enemy = GetEnemyHitting();
 
-		Debug.Log(enemy);
 
-		Enemy enemyScript = enemy.GetComponent<Enemy>();
-
-		if (!enemyScript.IsDead())
+		if (enemy != null && !enemy.IsDead)
 		{
-			enemyScript.TakeDamage(5);
+			enemy.TakeDamage(5);
+
+			Debug.Log(enemy);
 		}
 
 	}
@@ -45,7 +44,7 @@ public class Player : MonoBehaviour
 
             if (IsEnemy(hitObject))
             {
-            	return hitObject;
+            	return hitObject.GetComponent<Enemy>();
             }
 
         }
