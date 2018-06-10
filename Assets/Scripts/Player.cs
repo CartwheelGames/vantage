@@ -6,25 +6,32 @@ using Units.Enemies;
 public class Player : MonoBehaviour 
 {
 
-	public Camera camera;
+	private Camera camera;
 
 	private void Start () 
 	{
 
-		
+		camera = gameObject.GetComponent<Camera>();
 	}
 	
 
 	private void Update () 
 	{
 
-		Enemy enemy = GetEnemyHitting();
+		GameObject enemy = GetEnemyHitting();
 
 		Debug.Log(enemy);
 
+		Enemy enemyScript = enemy.GetComponent<Enemy>();
+
+		if (!enemyScript.IsDead())
+		{
+			enemyScript.TakeDamage(5);
+		}
+
 	}
 
-	private Enemy GetEnemyHitting () 
+	private GameObject GetEnemyHitting () 
 	{
 		RaycastHit hit;
 
@@ -38,7 +45,7 @@ public class Player : MonoBehaviour
 
             if (IsEnemy(hitObject))
             {
-            	return hitObject.GetComponent<Enemy>();
+            	return hitObject;
             }
 
         }
