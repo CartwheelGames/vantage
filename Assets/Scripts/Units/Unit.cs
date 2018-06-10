@@ -75,7 +75,7 @@ namespace Units
         {
             if (!isDead)
             {
-                transform.Translate(Vector3.forward * speed);
+                transform.Translate(Time.deltaTime * speed * Vector3.forward);
             }
             else
             {
