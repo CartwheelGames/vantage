@@ -17,6 +17,8 @@ namespace Projectiles
         [SerializeField]
         private float speed = 1f;
         public float Speed { get { return speed; }}
+        [SerializeField]
+        private GameObject deathEffect = null;
         private bool hasHit = false;
         private void Update()
         {
@@ -51,6 +53,7 @@ namespace Projectiles
                 {
                     hitUnit.TakeDamage(power);
                 }
+                SpawnDeathEffect();
 				hasHit = true;
                 Remove();
             }
@@ -61,8 +64,21 @@ namespace Projectiles
             if (!hasHit)
             {
                 hasHit = true;
+                SpawnDeathEffect();
                 Remove();
             }
+        }
+
+        private void SpawnDeathEffect()
+        {
+            if (deathEffect != null)
+            {
+                GameObject fx = Instantiate(deathEffect) as GameObject;
+                if (fx != null)
+                {
+                    fx.transform.position = transform.position;
+                }
+            }           
         }
 
         private void Remove()
