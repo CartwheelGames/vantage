@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Units
 {
+    [DisallowMultipleComponent]
     public class Unit : MonoBehaviour
     {
         private bool isDead = false;
@@ -65,7 +66,7 @@ namespace Units
             }
         }
 
-        private void Remove()
+        protected virtual void Remove()
         {
             Destroy(gameObject);
         }

@@ -6,12 +6,12 @@ using Units.Enemies;
 public class Player : MonoBehaviour 
 {
 
-	private Camera camera;
+	private Camera myCamera;
 
 	private void Start () 
 	{
 
-		camera = gameObject.GetComponent<Camera>();
+		myCamera = gameObject.GetComponent<Camera>();
 	}
 	
 
@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
 		{
 			enemy.TakeDamage(5);
 
-			Debug.Log(enemy);
+            Debug.Log(enemy);
 		}
 
 	}
@@ -34,7 +34,7 @@ public class Player : MonoBehaviour
 	{
 		RaycastHit hit;
 
-        Ray ray = camera.ScreenPointToRay(Input.mousePosition);
+        Ray ray = myCamera.ScreenPointToRay(Input.mousePosition);
         
         Physics.Raycast(ray, out hit);
 

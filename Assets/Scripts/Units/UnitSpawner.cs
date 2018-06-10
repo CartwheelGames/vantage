@@ -3,19 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Units
 {
+    [DisallowMultipleComponent]
     public class UnitSpawner : MonoBehaviour
     {
-
-        // Use this for initialization
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
+        
     }
 }
