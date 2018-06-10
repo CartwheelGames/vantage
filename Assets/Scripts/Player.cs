@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
 	private void Update () 
 	{
 
-		GameObject enemy = GetEnemyHitting();
+		Enemy enemy = GetEnemyHitting();
 
 
 		if (enemy != null && !enemy.IsDead)
@@ -30,7 +30,7 @@ public class Player : MonoBehaviour
 
 	}
 
-	private GameObject GetEnemyHitting () 
+	private Enemy GetEnemyHitting () 
 	{
 		RaycastHit hit;
 
