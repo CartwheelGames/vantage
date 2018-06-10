@@ -17,20 +17,24 @@ public class Player : MonoBehaviour
 
 	private void Update () 
 	{
+		GameObject objectHitting = GetObjectHitting();
 
-		Enemy enemy = GetEnemyHitting();
-
-
-		if (enemy != null && !enemy.IsDead)
+		if (IsEnemy(objectHitting))
 		{
+			Enemy enemy = objectHitting.GetComponent<Enemy>();
+			
 			enemy.TakeDamage(5);
 
             Debug.Log(enemy);
 		}
+		else if (IsPlatform(objectHitting))
+		{
+			Debug.Log("PLATFORM");
+		}
 
 	}
 
-	private Enemy GetEnemyHitting () 
+	private GameObject GetObjectHitting ()
 	{
 		RaycastHit hit;
 
@@ -40,20 +44,21 @@ public class Player : MonoBehaviour
 
         if (hit.collider != null)
         {
-        	GameObject hitObject = hit.collider.gameObject;
 
-            if (IsEnemy(hitObject))
-            {
-            	return hitObject.GetComponent<Enemy>();
-            }
-
+        	return hit.collider.gameObject;
         }
 
         return null;
 	}
 
+
 	private bool IsEnemy (GameObject target)
 	{
 		return target != null && target.GetComponent<Enemy>() != null;
+	}
+
+	private bool IsPlatform (GameObject target)
+	{
+		return target != null && target.GetComponent<Platform>() != null;
 	}
 }
