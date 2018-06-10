@@ -6,6 +6,7 @@ namespace Units
     public class Unit : MonoBehaviour
     {
         private bool isDead = false;
+        public bool IsDead { get { return isDead; } }
         [SerializeField]
         private float speed = 1f;
         [SerializeField]
@@ -21,7 +22,7 @@ namespace Units
             }
         }
 
-        protected void TakeDamage(float damage)
+        public void TakeDamage(float damage)
         {
             damage -= damage * (armor * armorReduction);
             if (damage > 0)
@@ -34,13 +35,17 @@ namespace Units
             }
         }
 
-        protected void Die()
+        public void Die()
         {
             // TODO Explosion Effects here
             // TODO recycle to an object pool, rather than destroy this gameObject.
-            isDead = true;
-            Invoke("Remove", 1f);
-            Destroy(gameObject);
+            if (!isDead)
+            {
+                healthPoints = 0f;
+                isDead = true;
+                Invoke("Remove", 1f);
+                Destroy(gameObject);
+            }
         }
 
         private void Remove()
