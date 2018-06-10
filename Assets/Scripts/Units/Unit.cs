@@ -13,35 +13,52 @@ namespace Units
         private float armor = 0;
         private const float armorReduction = 0.1f;
         [SerializeField]
-        private float healthPoints = 100f;
-        public float HealthPoints
+        private float maxHealth = 100f;
+        public float HealthPoints { get; private set; }
+
+		private void Start()
+		{
+            HealthPoints = maxHealth;
+		}
+
+        public void HealDamage(float amount)
         {
-            get
+            if (!isDead)
             {
-                return healthPoints;
+                HealthPoints = Mathf.Min(maxHealth, HealthPoints + amount);
             }
         }
 
-        public void TakeDamage(float damage)
+        public void HealMax ()
         {
-            damage -= damage * (armor * armorReduction);
-            if (damage > 0)
+            HealDamage(maxHealth);
+        }
+
+        public void TakeDamage(float amount)
+        {
+            amount -= amount * (armor * armorReduction);
+            if (amount > 0)
             {
-                healthPoints -= damage;
-                if (healthPoints <= 0 && !isDead)
+                HealthPoints -= amount;
+                if (HealthPoints <= 0 && !isDead)
                 {
                     Die();
                 }
             }
         }
 
-        public void Die()
+        public void TakeMaxDamage()
+        {
+            TakeDamage(maxHealth);
+        }
+
+        private void Die()
         {
             // TODO Explosion Effects here
             // TODO recycle to an object pool, rather than destroy this gameObject.
             if (!isDead)
             {
-                healthPoints = 0f;
+                HealthPoints = 0f;
                 isDead = true;
                 Invoke("Remove", 1f);
                 Destroy(gameObject);
