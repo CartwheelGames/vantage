@@ -22,17 +22,19 @@ namespace Units
         [SerializeField]
         private Transform[] gunAttachPoints = new Transform[0];
         private GunBase[] guns = new GunBase[0];
+        private bool hasSetup = false;
 
 		private void Start()
-		{
+        {
             HealthPoints = maxHealth;
 		}
 
         public void Setup(GameObject[] gunPrefabs)
         {
-            if (gunPrefabs != null && gunPrefabs.Length > 0)
+            if (!hasSetup && gunPrefabs != null && gunPrefabs.Length > 0)
             {
                 SetupGuns(gunPrefabs);
+                hasSetup = true;
             }
         }
 

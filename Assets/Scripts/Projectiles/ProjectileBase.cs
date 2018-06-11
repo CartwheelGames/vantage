@@ -25,10 +25,15 @@ namespace Projectiles
         [SerializeField]
         private GameObject deathEffect = null;
         private bool hasHit = false;
+        private bool hasSetup = false;
 
         public void Setup (Team team)
         {
-            myTeam = team;
+            if (hasSetup)
+            {
+                myTeam = team;
+                hasSetup = true;
+            }
         }
 
         private void Update()

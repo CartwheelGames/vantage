@@ -26,6 +26,7 @@ namespace Guns
         private GameObject projectilePrefab;
         [SerializeField]
         private Transform projectileOrigin = null;
+        private bool hasSetup = false;
 
         private void Start()
         {
@@ -34,7 +35,11 @@ namespace Guns
 
         private void Setup(Team team)
         {
-            myTeam = team;
+            if (!hasSetup)
+            {
+                myTeam = team;
+                hasSetup = true;
+            }
         }
 
         public void FireProjectile()
@@ -48,7 +53,7 @@ namespace Guns
                 cooldownProgress += Time.deltaTime;
                 return;
             }
-            cooldownProgress = 0;
+            cooldownProgress = 0f;
 
             PlayFiringAnimation();
 
