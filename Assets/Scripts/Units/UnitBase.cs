@@ -49,9 +49,10 @@ namespace Units
                 {
                     continue;
                 }
+
                 GameObject instance = Instantiate(gunPrefabs[i],
                                                  gunAttachPoints[i]);
-                if (instance)
+                if (instance != null)
                 {
                     GunBase gun = instance.GetComponent<GunBase>();
                     if (gun)
