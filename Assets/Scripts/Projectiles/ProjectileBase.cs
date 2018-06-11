@@ -2,11 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Units;
+using Teams;
+
 namespace Projectiles
 {
     [DisallowMultipleComponent]
-    public class Projectile : MonoBehaviour
+    public abstract class ProjectileBase : MonoBehaviour
     {
+        [SerializeField]
+        private Team myTeam = null;
+        public Team MyTeam { get { return myTeam; } }
         [SerializeField]
         private float power = 1f;
         public float Power { get { return power; }}
@@ -21,9 +26,9 @@ namespace Projectiles
         private GameObject deathEffect = null;
         private bool hasHit = false;
 
-        public void Setup ()
+        public void Setup (Team team)
         {
-            // TODO Apply in gun-specific modifiers via this function.
+            myTeam = team;
         }
 
         private void Update()

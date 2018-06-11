@@ -9,7 +9,7 @@ namespace Units
     public abstract class UnitSpawner : MonoBehaviour
     {
         [SerializeField]
-        private Team owner = null;
-        public Team Owner { get { return owner; } }
+        private Team myTeam = null;
+        public Team MyTeam { get { return myTeam; } }
     }
 }

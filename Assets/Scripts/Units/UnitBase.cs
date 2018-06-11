@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Guns;
 using Teams;
 
 namespace Units
@@ -9,27 +10,59 @@ namespace Units
     public abstract class UnitBase : MonoBehaviour
     {
         [SerializeField]
-        private Team owner = null;
-        public Team Owner { get { return owner; } }
-        private bool isDead = false;
-        public bool IsDead { get { return isDead; } }
+        private Team myTeam = null;
+        public Team MyTeam { get { return myTeam; } }
+        public bool IsDead { get; private set; }
         [SerializeField]
         private float armor = 0;
         private const float armorReduction = 0.1f;
         [SerializeField]
         private float maxHealth = 100f;
+        public float HealthPoints { get; private set; }
         [SerializeField]
         private Transform[] gunAttachPoints = new Transform[0];
-        public float HealthPoints { get; private set; }
+        private GunBase[] guns = new GunBase[0];
 
 		private void Start()
 		{
             HealthPoints = maxHealth;
 		}
 
+        public void Setup(GameObject[] gunPrefabs)
+        {
+            if (gunPrefabs != null && gunPrefabs.Length > 0)
+            {
+                SetupGuns(gunPrefabs);
+            }
+        }
+
+        public void SetupGuns(GameObject[] gunPrefabs)
+        {
+            guns = new GunBase[gunAttachPoints.Length];
+            for (var i = 0; i < gunAttachPoints.Length; i++)
+            {
+                if (i >= gunPrefabs.Length
+                    || gunPrefabs[i] == null
+                    || gunAttachPoints[i] == null)
+                {
+                    continue;
+                }
+                GameObject instance = Instantiate(gunPrefabs[i],
+                                                 gunAttachPoints[i]);
+                if (instance)
+                {
+                    GunBase gun = instance.GetComponent<GunBase>();
+                    if (gun)
+                    {
+                        guns[i] = gun;
+                    }
+                }
+            }
+        }
+
         public void HealDamage(float amount)
         {
-            if (!isDead)
+            if (!IsDead)
             {
                 HealthPoints = Mathf.Min(maxHealth, HealthPoints + amount);
             }
@@ -46,7 +79,7 @@ namespace Units
             if (amount > 0)
             {
                 HealthPoints -= amount;
-                if (HealthPoints <= 0 && !isDead)
+                if (HealthPoints <= 0 && !IsDead)
                 {
                     Die();
                 }
@@ -62,10 +95,10 @@ namespace Units
         {
             // TODO Explosion Effects here
             // TODO recycle to an object pool, rather than destroy this gameObject.
-            if (!isDead)
+            if (!IsDead)
             {
                 HealthPoints = 0f;
-                isDead = true;
+                IsDead = true;
                 Invoke("Remove", 1f);
                 Destroy(gameObject);
             }
