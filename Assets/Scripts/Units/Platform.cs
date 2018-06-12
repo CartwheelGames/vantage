@@ -5,6 +5,7 @@ namespace Units
 {
     public class Platform : UnitStatic
     {
-
+    	[SerializeField]
+    	private GameObject teleportPoint;
     }
 }
