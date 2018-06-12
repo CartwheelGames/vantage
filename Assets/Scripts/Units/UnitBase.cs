@@ -24,10 +24,10 @@ namespace Units
         private GunBase[] guns = new GunBase[0];
         private bool hasSetup = false;
 
-		private void Start()
+        private void Start()
         {
             HealthPoints = maxHealth;
-		}
+        }
 
         public void Setup(GameObject[] gunPrefabs)
         {
@@ -71,14 +71,14 @@ namespace Units
             }
         }
 
-        public void HealMax ()
+        public void HealMax()
         {
             HealDamage(maxHealth);
         }
 
         public void TakeDamage(float amount)
         {
-            amount -= amount * (armor * armorReduction);
+            amount -= armor > 0 ? amount * armor * armorReduction : 0;
             if (amount > 0)
             {
                 HealthPoints -= amount;
