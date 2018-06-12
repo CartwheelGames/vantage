@@ -65,7 +65,7 @@ namespace Projectiles
             if (!hasHit)
             {
                 UnitBase hitUnit = target.gameObject.GetComponent<UnitBase>();
-                if (hitUnit != null)
+                if (hitUnit != null && hitUnit.MyTeam != myTeam)
                 {
                     hitUnit.TakeDamage(power);
                 }
