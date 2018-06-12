@@ -5,7 +5,6 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public abstract class GameManager : MonoBehaviour {
 
-var player;
 
 // player has reference to currentTower
 // tower has reference to all turrets it commands

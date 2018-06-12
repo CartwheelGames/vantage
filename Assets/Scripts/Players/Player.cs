@@ -8,9 +8,13 @@ namespace Players
     public class Player : MonoBehaviour
     {
         [SerializeField]
+        private GameObject currentPlatform;
+        [SerializeField]
         private Team myTeam = null;
         public Team MyTeam { get { return myTeam; } }
         private Camera myCamera;
+
+
         private void Start()
         {
             myCamera = gameObject.GetComponent<Camera>();
