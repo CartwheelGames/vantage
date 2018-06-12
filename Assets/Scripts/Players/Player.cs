@@ -24,14 +24,20 @@ namespace Players
         {
             GameObject objectHitting = GetObjectHitting();
 
+            bool isMouseDown = Input.GetMouseButtonDown(0);
+
             if (IsEnemy(objectHitting))
             {
+                Debug.Log("MOB");
                 UnitBase hitUnit = objectHitting.GetComponent<UnitBase>();
                 hitUnit.TakeDamage(5);
             }
-            else if (IsPlatform(objectHitting))
+            else if (IsPlatform(objectHitting) && isMouseDown)
             {
                 Debug.Log("PLATFORM");
+                GameObject teleportPoint = objectHitting.GetComponent<Platform>().TeleportPoint;
+                transform.position = teleportPoint.transform.position;
+                transform.rotation = teleportPoint.transform.rotation;
             }
 
         }

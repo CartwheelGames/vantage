@@ -7,5 +7,7 @@ namespace Units
     {
     	[SerializeField]
     	private GameObject teleportPoint;
+    	public GameObject TeleportPoint { get { return teleportPoint; } }
+
     }
 }
