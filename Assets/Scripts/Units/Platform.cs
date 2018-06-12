@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Units
 {
-    public class UnitStatic : UnitBase
+    public class Platform : UnitStatic
     {
+
     }
 }

@@ -16,7 +16,12 @@ namespace Projectiles
         private float power = 1f;
         public float Power { get { return power; }}
         [SerializeField]
-        private float lifeTime = 1f;
+		[Range(0f, 1024f)]
+        private float radius = 0f;
+        public float Radius { get { return radius; } }
+        [SerializeField]
+        [Range(0f, 4096f)]
+        private float lifeTime = 10f;
         public float LifeTime { get { return lifeTime; } }
         private float timeAlive = 0f;
         [SerializeField]

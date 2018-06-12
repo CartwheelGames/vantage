@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Units
+namespace Projectiles
 {
-    public class UnitStatic : UnitBase
+    public class ShellProjectile : ProjectileBase
     {
+
     }
 }
