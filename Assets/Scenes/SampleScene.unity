@@ -514,18 +514,6 @@ Prefab:
       propertyPath: m_Name
       value: Turret2
       objectReference: {fileID: 0}
-    - target: {fileID: 4153431624477656, guid: 1d3e6494f1a80482583d7973be589d0b, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -168.363
-      objectReference: {fileID: 0}
-    - target: {fileID: 4153431624477656, guid: 1d3e6494f1a80482583d7973be589d0b, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -5.0010004
-      objectReference: {fileID: 0}
-    - target: {fileID: 4153431624477656, guid: 1d3e6494f1a80482583d7973be589d0b, type: 2}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 8.801001
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1d3e6494f1a80482583d7973be589d0b, type: 2}
   m_IsPrefabParent: 0
