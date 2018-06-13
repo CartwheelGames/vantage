@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Units;
@@ -8,55 +8,74 @@ namespace Players
     public class Player : MonoBehaviour
     {
         [SerializeField]
-        private Platform currentPlatform;
+        private Platform currentPlatform = null;
         [SerializeField]
         private Team myTeam = null;
         public Team MyTeam { get { return myTeam; } }
-        private Camera myCamera;
-
-
-        private void Start ()
-        {
-            myCamera = gameObject.GetComponent<Camera>();
-        }
+        [SerializeField]
+        private GameObject cursor = null;
+        [SerializeField]
+        private Camera myCamera = null;
 
         private void Update()
         {
+            if (currentPlatform == null)
+            {
+                return;
+            }
             // GET OBJECT HITTING AND POINT FACING
-            Ray ray = myCamera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = myCamera.ViewportPointToRay(new Vector2(0.5f, 0.5f));
             Vector3 pointFacing = Vector3.zero;
             GameObject objectHitting = GetObjectHitting(ray, out pointFacing);
+            if (objectHitting == null)
+            {
+                pointFacing = ray.GetPoint(512f);
+            }
             Platform platform = GetPlatformFromObject(objectHitting);
             UnitMobile unitMobile = GetUnitMobileFromObject(objectHitting);
 
+            transform.position = currentPlatform.TeleportPoint;
+            if (currentPlatform.IsSensorColumnShown)
+            {
+                currentPlatform.IsSensorColumnShown = false;
+            }
             // POINT TURRETS AT POINT FACING
             currentPlatform.PointTurretsAtPoint(pointFacing);
+
+            if (cursor)
+            {
+                cursor.transform.position = pointFacing;
+            }
 
             // IS MOUSE DOWN?
             if (Input.GetMouseButtonDown(0))
             {
-                // IF MOBILE UNIT, FIRE! IF PLATFORM TELEPORT!
-                if (unitMobile != null && unitMobile.MyTeam != myTeam)
-                {
-                    Debug.Log("MOVING UNIT"); 
-                    currentPlatform.FireTurrets();
-                }
-                else if (platform != null && platform.MyTeam == myTeam)
+                if (platform != null && platform.MyTeam == myTeam)
                 {
                     Debug.Log("PLATFORM");
                     SetCurrentPlatform(platform);
+                }
+                else
+                {
+                    currentPlatform.FireTurrets();
                 }
             }
         }
 
         private void SetCurrentPlatform (Platform platform)
         {
-            // SET CURRENT PLATFORM
-            currentPlatform = platform;
-            
-            // MOVE PLAYER TO PLATFORM
-            transform.position = platform.TeleportPoint.transform.position;
-            transform.rotation = platform.TeleportPoint.transform.rotation;
+            if(currentPlatform != null)
+            {
+                currentPlatform.IsSensorColumnShown = true;
+            }
+            if (platform != null)
+            {
+                currentPlatform.IsSensorColumnShown = false;
+                // SET CURRENT PLATFORM
+                currentPlatform = platform;
+                // MOVE PLAYER TO PLATFORM
+                transform.position = platform.TeleportPoint;
+            }
         }
 
         private GameObject GetObjectHitting (Ray ray, out Vector3 point)
@@ -91,7 +110,6 @@ namespace Players
             {
                 return obj.GetComponent<Platform>();
             }
-
             return null;
         }
     }

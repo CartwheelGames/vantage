@@ -36,13 +36,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1282154221938488}
-  m_LocalRotation: {x: -0, y: 0.50229007, z: -0, w: 0.86469924}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -8.3, y: 12.15, z: 9.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 60.303, z: 0}
+  m_LocalEulerAnglesHint: {x: 36.501003, y: 142.06201, z: 0}
 --- !u!20 &20858588299981728
 Camera:
   m_ObjectHideFlags: 1
@@ -74,11 +74,11 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 1
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+  m_StereoMirrorMode: 0
 --- !u!81 &81383762941033106
 AudioListener:
   m_ObjectHideFlags: 1
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentPlatform: {fileID: 0}
-  myTeam: {fileID: 0}
+  myTeam: {fileID: 11400000, guid: 389a5b8574a544f1c9fa2ed52252cbdf, type: 2}
 --- !u!114 &114695097340682286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -115,6 +115,6 @@ MonoBehaviour:
   sensitivityY: 20
   minimumX: -360
   maximumX: 360
-  minimumY: -100
-  maximumY: 0
+  minimumY: -80
+  maximumY: 80
   frameCounter: 20

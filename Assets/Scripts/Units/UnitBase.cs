@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Guns;
@@ -21,6 +21,7 @@ namespace Units
         public float HealthPoints { get; private set; }
         [SerializeField]
         private Transform[] gunAttachPoints = new Transform[0];
+        [SerializeField]
         protected GunBase[] guns = new GunBase[0];
         private bool hasSetup = false;
 

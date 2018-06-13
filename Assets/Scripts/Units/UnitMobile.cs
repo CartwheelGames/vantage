@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Guns;
@@ -27,10 +27,10 @@ namespace Units
             if (!IsDead)
             {
                 Vector3 myPos = transform.position;
-                Vector3 targetPos = moveTarget.transform.position;
-                float distanceToTarget = Vector3.Distance(targetPos, myPos);
                 if (moveTarget != null)
                 {
+                    Vector3 targetPos = moveTarget.transform.position;
+                    float distanceToTarget = Vector3.Distance(targetPos, myPos);
                     Vector3 direction;
                     if (distanceToTarget > scatterDistance)
                     {
