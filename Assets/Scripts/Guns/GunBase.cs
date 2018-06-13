@@ -23,7 +23,7 @@ namespace Guns
         [SerializeField]
         private Transform barrel = null;
         [SerializeField]
-        private GameObject projectilePrefab;
+        private GameObject projectilePrefab = null;
         [SerializeField]
         private Transform projectileOrigin = null;
         private bool hasSetup = false;

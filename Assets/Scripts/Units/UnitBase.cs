@@ -29,8 +29,9 @@ namespace Units
             HealthPoints = maxHealth;
         }
 
-        public void Setup(GameObject[] gunPrefabs)
+        public void Setup(Team team, GameObject[] gunPrefabs = null)
         {
+            myTeam = team;
             if (!hasSetup && gunPrefabs != null && gunPrefabs.Length > 0)
             {
                 SetupGuns(gunPrefabs);
