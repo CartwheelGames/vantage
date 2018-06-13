@@ -9,14 +9,23 @@ namespace Units
     	private GameObject teleportPoint;
     	public GameObject TeleportPoint { get { return teleportPoint; } }
     	[SerializeField]
-    	private GameObject [] turrets = null;
+    	private Turret [] turrets = null;
 
 
-    	public void PointTurretsAtTarget (GameObject target)
+    	public void PointTurretsAtPoint (Vector3 point)
     	{
-    		Debug.Log(target);
-    		//UnitBase hitUnit = objectHitting.GetComponent<UnitBase>();
-            //hitUnit.TakeDamage(5);
+    		foreach (Turret turret in turrets)
+    		{
+    			//turret.PointTo()
+    		}
+    	}
+
+    	public void FireTurrets ()
+    	{
+    		foreach (Turret turret in turrets)
+    		{
+    			// turret.
+    		}
     	}
     }
 }

@@ -41,8 +41,9 @@ GameObject:
   - component: {fileID: 33542698610103142}
   - component: {fileID: 23879314656311076}
   - component: {fileID: 65860006289909044}
+  - component: {fileID: 114030252460986346}
   m_Layer: 0
-  m_Name: Barrel
+  m_Name: Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,6 +184,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &114030252460986346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1892295379817724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fb73f05cdc1a4bed8388b179ecedb57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myTeam: {fileID: 0}
+  cooldownDuration: 90
+  rotSpeed: 1
+  minPitch: 90
+  maxPitch: -90
+  barrel: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  projectileOrigin: {fileID: 0}
 --- !u!114 &114171745473256004
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -22,19 +22,30 @@ namespace Players
 
         private void Update()
         {
-            GameObject objectHitting = GetObjectHitting();
+            // GET OBJECT HITTING AND POINT FACING
+            Ray ray = myCamera.ScreenPointToRay(Input.mousePosition);
+            Vector3 pointFacing = Vector3.zero;
+            GameObject objectHitting = GetObjectHitting(ray, out pointFacing);
             Platform platform = GetPlatformFromObject(objectHitting);
             UnitMobile unitMobile = GetUnitMobileFromObject(objectHitting);
 
-            if (unitMobile != null && unitMobile.MyTeam != myTeam)
+            // POINT TURRETS AT POINT FACING
+            currentPlatform.PointTurretsAtPoint(pointFacing);
+
+            // IS MOUSE DOWN?
+            if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("MOVING UNIT"); 
-                currentPlatform.PointTurretsAtTarget(objectHitting);
-            }
-            else if (platform != null && Input.GetMouseButtonDown(0))
-            {
-                Debug.Log("PLATFORM");
-                SetCurrentPlatform(platform);
+                // IF MOBILE UNIT, FIRE! IF PLATFORM TELEPORT!
+                if (unitMobile != null && unitMobile.MyTeam != myTeam)
+                {
+                    Debug.Log("MOVING UNIT"); 
+                    currentPlatform.FireTurrets();
+                }
+                else if (platform != null && platform.MyTeam == myTeam)
+                {
+                    Debug.Log("PLATFORM");
+                    SetCurrentPlatform(platform);
+                }
             }
         }
 
@@ -48,17 +59,15 @@ namespace Players
             transform.rotation = platform.TeleportPoint.transform.rotation;
         }
 
-        private GameObject GetObjectHitting ()
+        private GameObject GetObjectHitting (Ray ray, out Vector3 point)
         {
+            point = Vector3.zero;
+
             RaycastHit hit;
 
-            Ray ray = myCamera.ScreenPointToRay(Input.mousePosition);
-
-            Physics.Raycast(ray, out hit);
-
-            if (hit.collider != null)
+            if (Physics.Raycast(ray, out hit))
             {
-
+                point = hit.point;
                 return hit.collider.gameObject;
             }
 

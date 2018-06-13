@@ -142,3 +142,5 @@ MonoBehaviour:
   maxHealth: 100
   gunAttachPoints: []
   teleportPoint: {fileID: 1771414192200772}
+  turrets:
+  - {fileID: 0}
