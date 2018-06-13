@@ -9,9 +9,7 @@ namespace Projectiles
     [DisallowMultipleComponent]
     public abstract class ProjectileBase : MonoBehaviour
     {
-        [SerializeField]
-        private Team myTeam = null;
-        public Team MyTeam { get { return myTeam; } }
+        public Team myTeam { get; private set; }
         [SerializeField]
         private float power = 1f;
         public float Power { get { return power; }}
