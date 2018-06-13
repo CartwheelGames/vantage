@@ -8,11 +8,27 @@ namespace Units
     {
         [SerializeField]
         private float speed = 1f;
-        protected void Update()
+		[SerializeField]
+        private float rotSpeed = 1f;
+
+        private UnitBase moveTarget = null;
+
+        public void setMoveTarget(UnitBase newMoveTarget)
+        {
+            moveTarget = newMoveTarget;
+        }
+
+		protected void Update()
         {
             if (!IsDead)
             {
-                transform.Translate(Time.deltaTime * speed * Vector3.forward);
+                if (moveTarget != null)
+                {
+                    Vector3 direction = (moveTarget.transform.position - transform.position).normalized;
+                    Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.up);
+                    transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotSpeed);
+                    transform.Translate(transform.forward * Time.deltaTime * speed);
+                }
             }
             else
             {

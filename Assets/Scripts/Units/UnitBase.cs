@@ -24,7 +24,7 @@ namespace Units
         private GunBase[] guns = new GunBase[0];
         private bool hasSetup = false;
 
-        private void Start()
+        protected virtual void Start()
         {
             HealthPoints = maxHealth;
         }
