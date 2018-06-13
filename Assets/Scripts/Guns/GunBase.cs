@@ -28,7 +28,7 @@ namespace Guns
         private Transform projectileOrigin = null;
         private bool hasSetup = false;
 
-        private void Start()
+        protected virtual void Start()
         {
             cooldownProgress = cooldownDuration;
         }
