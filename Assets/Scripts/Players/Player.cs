@@ -8,14 +8,14 @@ namespace Players
     public class Player : MonoBehaviour
     {
         [SerializeField]
-        private GameObject currentPlatform;
+        private Platform currentPlatform;
         [SerializeField]
         private Team myTeam = null;
         public Team MyTeam { get { return myTeam; } }
         private Camera myCamera;
 
 
-        private void Start()
+        private void Start ()
         {
             myCamera = gameObject.GetComponent<Camera>();
         }
@@ -23,26 +23,32 @@ namespace Players
         private void Update()
         {
             GameObject objectHitting = GetObjectHitting();
+            Platform platform = GetPlatformFromObject(objectHitting);
+            UnitMobile unitMobile = GetUnitMobileFromObject(objectHitting);
 
-            bool isMouseDown = Input.GetMouseButtonDown(0);
-
-            if (IsEnemy(objectHitting))
+            if (unitMobile != null && unitMobile.MyTeam != myTeam)
             {
-                Debug.Log("MOB");
-                UnitBase hitUnit = objectHitting.GetComponent<UnitBase>();
-                hitUnit.TakeDamage(5);
+                Debug.Log("MOVING UNIT"); 
+                currentPlatform.PointTurretsAtTarget(objectHitting);
             }
-            else if (IsPlatform(objectHitting) && isMouseDown)
+            else if (platform != null && Input.GetMouseButtonDown(0))
             {
                 Debug.Log("PLATFORM");
-                GameObject teleportPoint = objectHitting.GetComponent<Platform>().TeleportPoint;
-                transform.position = teleportPoint.transform.position;
-                transform.rotation = teleportPoint.transform.rotation;
+                SetCurrentPlatform(platform);
             }
-
         }
 
-        private GameObject GetObjectHitting()
+        private void SetCurrentPlatform (Platform platform)
+        {
+            // SET CURRENT PLATFORM
+            currentPlatform = platform;
+            
+            // MOVE PLAYER TO PLATFORM
+            transform.position = platform.TeleportPoint.transform.position;
+            transform.rotation = platform.TeleportPoint.transform.rotation;
+        }
+
+        private GameObject GetObjectHitting ()
         {
             RaycastHit hit;
 
@@ -59,20 +65,25 @@ namespace Players
             return null;
         }
 
-
-        private bool IsEnemy(GameObject target)
+        private UnitMobile GetUnitMobileFromObject (GameObject obj)
         {
-            if (target != null)
+            if (obj != null && obj.GetComponent<UnitMobile>() != null)
             {
-                UnitBase targetUnit = target.GetComponent<UnitBase>();
-                return targetUnit != null && targetUnit.MyTeam != myTeam;
+                return obj.GetComponent<UnitMobile>();
             }
-            return false;
+
+            return null;
+
         }
 
-        private bool IsPlatform(GameObject target)
+        private Platform GetPlatformFromObject(GameObject obj)
         {
-            return target != null && target.GetComponent<Platform>() != null;
+            if (obj != null && obj.GetComponent<Platform>() != null)
+            {
+                return obj.GetComponent<Platform>();
+            }
+
+            return null;
         }
     }
 }
