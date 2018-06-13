@@ -21,7 +21,7 @@ namespace Units
         public float HealthPoints { get; private set; }
         [SerializeField]
         private Transform[] gunAttachPoints = new Transform[0];
-        private GunBase[] guns = new GunBase[0];
+        protected GunBase[] guns = new GunBase[0];
         private bool hasSetup = false;
 
         protected virtual void Start()

@@ -21,6 +21,8 @@ namespace Guns
         [SerializeField]
         private float maxPitch = -90f;
         [SerializeField]
+        private float range = 150f;
+        [SerializeField]
         private Transform barrel = null;
         [SerializeField]
         private GameObject projectilePrefab = null;
@@ -81,6 +83,17 @@ namespace Guns
             Vector3 endAngle = endRot.eulerAngles;
             float pitch = Mathf.Clamp(endAngle.y, minPitch, maxPitch);
             barrel.eulerAngles = new Vector3(endAngle.x, pitch, endAngle.z);
+        }
+
+        public bool GetIsAimedAtTarget(GameObject target)
+        {
+            Ray ray = new Ray(projectileOrigin.position, projectileOrigin.forward);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, range, 1 << target.layer))
+            {
+                return hit.collider.gameObject == target;
+            }
+            return false;
         }
 
         private void PlayFiringAnimation()
