@@ -73,7 +73,8 @@ namespace Guns
             {
                 return;
             }
-            Quaternion targetRot = Quaternion.LookRotation(point, transform.up);
+            Vector3 direction = (point - transform.position).normalized;
+            Quaternion targetRot = Quaternion.LookRotation(direction, transform.up);
             Quaternion startRot = barrel.rotation;
             float amount = Time.deltaTime * rotSpeed;
             Quaternion endRot = Quaternion.Slerp(startRot, targetRot, amount);
