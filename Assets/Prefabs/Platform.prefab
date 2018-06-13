@@ -144,3 +144,4 @@ MonoBehaviour:
   teleportPoint: {fileID: 1771414192200772}
   turrets:
   - {fileID: 0}
+  - {fileID: 0}

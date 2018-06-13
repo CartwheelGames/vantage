@@ -16,7 +16,8 @@ namespace Units
     	{
     		foreach (Turret turret in turrets)
     		{
-    			//turret.PointTo()
+                Debug.Log(turret);
+                turret.PointAt(point);
     		}
     	}
 
@@ -24,7 +25,7 @@ namespace Units
     	{
     		foreach (Turret turret in turrets)
     		{
-    			// turret.
+                turret.FireProjectile();
     		}
     	}
     }

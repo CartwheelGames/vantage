@@ -218,3 +218,4 @@ MonoBehaviour:
   armor: 0
   maxHealth: 100
   gunAttachPoints: []
+  gun: {fileID: 114030252460986346}
