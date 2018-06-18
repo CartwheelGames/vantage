@@ -9,7 +9,7 @@ namespace Projectiles
     [DisallowMultipleComponent]
     public abstract class ProjectileBase : MonoBehaviour
     {
-        public TeamData myTeam { get; private set; }
+        public TeamData myTeamData { get; private set; }
         [SerializeField]
         private float power = 1f;
         public float Power { get { return power; }}
@@ -34,7 +34,7 @@ namespace Projectiles
         {
             if (hasSetup)
             {
-                myTeam = team;
+                myTeamData = team;
                 hasSetup = true;
             }
         }
@@ -68,7 +68,7 @@ namespace Projectiles
             if (!hasHit)
             {
                 UnitBase hitUnit = target.gameObject.GetComponent<UnitBase>();
-                if (hitUnit != null && hitUnit.MyTeam != myTeam)
+                if (hitUnit != null && hitUnit.MyTeamData != myTeamData)
                 {
                     hitUnit.TakeDamage(power);
                 }

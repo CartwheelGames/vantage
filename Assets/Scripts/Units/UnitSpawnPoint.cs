@@ -9,8 +9,8 @@ namespace Units
     public abstract class UnitSpawnPoint : MonoBehaviour
     {
         [SerializeField]
-        private TeamData myTeam = null;
-        public TeamData MyTeam { get { return myTeam; } }
+        private TeamData myTeamData = null;
+        public TeamData MyTeamData { get { return myTeamData; } }
         [SerializeField]
         private float radius = 10f;
         public float Radius { get { return radius; } }

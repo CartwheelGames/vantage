@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Units;
@@ -10,8 +10,8 @@ namespace Players
         [SerializeField]
         private Platform currentPlatform = null;
         [SerializeField]
-        private TeamData myTeam = null;
-        public TeamData MyTeam { get { return myTeam; } }
+        private TeamData myTeamData = null;
+        public TeamData MyTeamData { get { return myTeamData; } }
         [SerializeField]
         private GameObject cursor = null;
         [SerializeField]
@@ -50,7 +50,7 @@ namespace Players
             // IS MOUSE DOWN?
             if (Input.GetMouseButtonDown(0))
             {
-                if (platform != null && platform.MyTeam == myTeam)
+                if (platform != null && platform.MyTeamData == myTeamData)
                 {
                     Debug.Log("PLATFORM");
                     SetCurrentPlatform(platform);

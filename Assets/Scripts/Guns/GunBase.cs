@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Projectiles;
@@ -9,8 +9,8 @@ namespace Guns
     public abstract class GunBase : MonoBehaviour
     {
         [SerializeField]
-        private TeamData myTeam = null;
-        public TeamData MyTeam { get { return myTeam; } }
+        private TeamData myTeamData = null;
+        public TeamData MyTeamData { get { return myTeamData; } }
         [SerializeField]
         private float cooldownDuration = 1f;
         private float cooldownTime = 0f;
@@ -38,7 +38,7 @@ namespace Guns
         {
             if (!hasSetup)
             {
-                myTeam = team;
+                myTeamData = team;
                 hasSetup = true;
             }
         }
@@ -59,7 +59,7 @@ namespace Guns
             ProjectileBase projectile = instance.GetComponent<ProjectileBase>();
             if (projectile)
             {
-                projectile.Setup(myTeam);
+                projectile.Setup(myTeamData);
             }
         }
 

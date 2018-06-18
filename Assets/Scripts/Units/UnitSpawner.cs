@@ -23,17 +23,25 @@ namespace Units
     public class UnitSpawner : MonoBehaviour
     {
         [SerializeField]
-        private TeamData myTeam = null;
-        public TeamData MyTeam { get { return myTeam; } }
+        private TeamData myTeamData = null;
+        public TeamData MyTeamData { get { return myTeamData; } }
+        public Team MyTeam { get; private set; }
         [SerializeField]
         private Wave[] waves = new Wave[0];
         private int waveIndex = 0;
         private int waveSpawnCount = 0;
         private float timeOfNextSpawn = 0f;
         private bool isDone = false;
+
+        public void SetupTeam(Team team)
+        {
+            MyTeam = team;
+            myTeamData = team.teamData;
+        }
+
 		private void Update()
 		{
-            if (isDone)
+            if (isDone || MyTeam == null || waves.Length == 0)
             {
                 return;
             }
@@ -56,7 +64,7 @@ namespace Units
                 UnitBase unit = SpawnUnit();
                 if (unit != null)
                 {
-                    unit.Setup(myTeam);
+                    unit.Setup(MyTeam);
                     waveSpawnCount++;
                 }
                 timeOfNextSpawn = DetermineTimeOfNextSpawn();
@@ -84,12 +92,12 @@ namespace Units
             UnitSpawnPoint[] spawnPoints = wave.spawnPoints;
 			int spawnIndex = Random.Range(0, spawnPoints.Length);
             UnitSpawnPoint spawnPoint = spawnPoints[spawnIndex];
-            if (spawnPoint.MyTeam != myTeam)
+            if (spawnPoint.MyTeamData != myTeamData)
             {
                 Debug.LogWarning("Could not spawn unit for team "
-                                 + myTeam.DisplayName
+                                 + myTeamData.DisplayName
                                  + " at spawn point owned by "
-                                 + spawnPoint.MyTeam.DisplayName);
+                                 + spawnPoint.MyTeamData.DisplayName);
                 return null;
             }
             GameObject[] spawnPrefabs = wave.spawnPrefabs;

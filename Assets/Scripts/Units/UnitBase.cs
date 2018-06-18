@@ -10,8 +10,11 @@ namespace Units
     public abstract class UnitBase : MonoBehaviour
     {
         [SerializeField]
-        private TeamData myTeam = null;
-        public TeamData MyTeam { get { return myTeam; } }
+        private TeamData myTeamData = null;
+        public TeamData MyTeamData {get { return myTeamData;}}
+        [SerializeField]
+        private Team myTeam = null;
+        public Team MyTeam { get { return myTeam; } }
         public bool IsDead { get; private set; }
         [SerializeField]
         private float armor = 0;
@@ -30,9 +33,10 @@ namespace Units
             HealthPoints = maxHealth;
         }
 
-        public void Setup(TeamData team, GameObject[] gunPrefabs = null)
+        public void Setup (Team team, GameObject[] gunPrefabs = null)
         {
             myTeam = team;
+            myTeamData = team.teamData;
             if (!hasSetup && gunPrefabs != null && gunPrefabs.Length > 0)
             {
                 SetupGuns(gunPrefabs);
