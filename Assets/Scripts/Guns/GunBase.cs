@@ -9,8 +9,8 @@ namespace Guns
     public abstract class GunBase : MonoBehaviour
     {
         [SerializeField]
-        private Team myTeam = null;
-        public Team MyTeam { get { return myTeam; } }
+        private TeamData myTeam = null;
+        public TeamData MyTeam { get { return myTeam; } }
         [SerializeField]
         private float cooldownDuration = 1f;
         private float cooldownTime = 0f;
@@ -34,7 +34,7 @@ namespace Guns
         {
         }
 
-        private void Setup(Team team)
+        private void Setup(TeamData team)
         {
             if (!hasSetup)
             {

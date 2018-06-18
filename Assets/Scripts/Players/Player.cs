@@ -10,8 +10,8 @@ namespace Players
         [SerializeField]
         private Platform currentPlatform = null;
         [SerializeField]
-        private Team myTeam = null;
-        public Team MyTeam { get { return myTeam; } }
+        private TeamData myTeam = null;
+        public TeamData MyTeam { get { return myTeam; } }
         [SerializeField]
         private GameObject cursor = null;
         [SerializeField]

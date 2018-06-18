@@ -9,7 +9,7 @@ namespace Projectiles
     [DisallowMultipleComponent]
     public abstract class ProjectileBase : MonoBehaviour
     {
-        public Team myTeam { get; private set; }
+        public TeamData myTeam { get; private set; }
         [SerializeField]
         private float power = 1f;
         public float Power { get { return power; }}
@@ -30,7 +30,7 @@ namespace Projectiles
         private bool hasHit = false;
         private bool hasSetup = false;
 
-        public void Setup (Team team)
+        public void Setup (TeamData team)
         {
             if (hasSetup)
             {

@@ -23,8 +23,8 @@ namespace Units
     public class UnitSpawner : MonoBehaviour
     {
         [SerializeField]
-        private Team myTeam = null;
-        public Team MyTeam { get { return myTeam; } }
+        private TeamData myTeam = null;
+        public TeamData MyTeam { get { return myTeam; } }
         [SerializeField]
         private Wave[] waves = new Wave[0];
         private int waveIndex = 0;

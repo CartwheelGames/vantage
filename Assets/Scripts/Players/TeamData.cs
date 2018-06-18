@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Teams
 {
-    public class Team : ScriptableObject
+    public class TeamData : ScriptableObject
     {
         [SerializeField]
         private Color displayColor = new Color(0, 0, 0, 1);
