@@ -25,8 +25,10 @@ namespace Units
         protected override void Start()
         {
             base.Start();
-
-            MoveAlongPath();
+            if (!string.IsNullOrEmpty(pathName))
+            {
+                MoveAlongPath(pathName);
+            }
         }
 
         protected void Update()
@@ -65,11 +67,10 @@ namespace Units
             }
         }
 
-        private void MoveAlongPath()
+        public void MoveAlongPath(string pathName)
         {
             Vector3[] path = iTweenPath.GetPath(pathName);
             iTween.MoveTo(gameObject, iTween.Hash("path", path, "time", moveDuration, "orientToPath", true, "looktime", 1));
-
         }
       
     }

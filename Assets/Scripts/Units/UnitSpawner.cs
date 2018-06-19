@@ -110,6 +110,11 @@ namespace Units
             if (instance != null)
             {
                 UnitBase unit = instance.GetComponent<UnitBase>();
+                UnitMobile unitMobile = unit as UnitMobile;
+                if (unitMobile != null && !string.IsNullOrEmpty(spawnPoint.PathName))
+                {
+                    unitMobile.MoveAlongPath(spawnPoint.PathName);
+                }
                 if (unit != null)
                 {
                     return unit;

@@ -14,5 +14,8 @@ namespace Units
         [SerializeField]
         private float radius = 10f;
         public float Radius { get { return radius; } }
+        [SerializeField]
+        private string pathName = "";
+        public string PathName { get { return pathName; }}
     }
 }
