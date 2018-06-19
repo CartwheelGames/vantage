@@ -1871,40 +1871,6 @@ Prefab:
       propertyPath: m_Name
       value: Mob 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4346155468708216, guid: c43e34a382e1d4dbab93e25d66e89e4e, type: 2}
-      propertyPath: m_LocalScale.z
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 65641449456935104, guid: c43e34a382e1d4dbab93e25d66e89e4e,
-        type: 2}
-      propertyPath: m_Size.z
-      value: 10.2860565
-      objectReference: {fileID: 0}
-    - target: {fileID: 65641449456935104, guid: c43e34a382e1d4dbab93e25d66e89e4e,
-        type: 2}
-      propertyPath: m_Center.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 65641449456935104, guid: c43e34a382e1d4dbab93e25d66e89e4e,
-        type: 2}
-      propertyPath: m_Size.x
-      value: 3.5468986
-      objectReference: {fileID: 0}
-    - target: {fileID: 65641449456935104, guid: c43e34a382e1d4dbab93e25d66e89e4e,
-        type: 2}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 65641449456935104, guid: c43e34a382e1d4dbab93e25d66e89e4e,
-        type: 2}
-      propertyPath: m_Size.y
-      value: 3.3558292
-      objectReference: {fileID: 0}
-    - target: {fileID: 65641449456935104, guid: c43e34a382e1d4dbab93e25d66e89e4e,
-        type: 2}
-      propertyPath: m_Center.y
-      value: 1.1779146
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c43e34a382e1d4dbab93e25d66e89e4e, type: 2}
   m_IsPrefabParent: 0
