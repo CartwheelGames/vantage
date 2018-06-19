@@ -15,7 +15,7 @@ namespace Units
         [SerializeField]
         private float scatterDistance = 25f;
         [SerializeField]
-        private string pathName = "MovingUnitPath";
+        private string pathName = "";
         [SerializeField]
         private int moveDuration = 100;
 

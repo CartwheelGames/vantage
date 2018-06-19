@@ -6,7 +6,7 @@ using Teams;
 namespace Units
 {
     [DisallowMultipleComponent]
-    public abstract class UnitSpawnPoint : MonoBehaviour
+    public class UnitSpawnPoint : MonoBehaviour
     {
         [SerializeField]
         private TeamData myTeamData = null;

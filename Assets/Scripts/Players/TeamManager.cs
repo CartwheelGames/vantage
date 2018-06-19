@@ -30,9 +30,15 @@ namespace Teams
             }
             foreach (Team team in teams)
             {
-                Team[] enemies = teams.Where(t => t != team).ToArray();
-                Debug.Log(teams.Where(t => t != team));
-                team.SetEnemies(enemies);
+                List<Team> enemies = new List<Team>();
+                foreach (Team otherTeam in teams)
+                {
+                    if (otherTeam != team)
+                    {
+                        enemies.Add(team);
+                    }
+                }
+                team.SetEnemies(enemies.ToArray());
                 foreach (UnitSpawner spawner in spawners)
                 {
                     if (spawner.MyTeamData == team.teamData)
@@ -70,11 +76,12 @@ namespace Teams
         }
         public UnitBase[] GetEnemyUnits()
         {
-            if (enemyTeams == null || enemyTeams.Length == 0)
+            List<UnitBase> enemyUnits = new List<UnitBase>();
+            foreach (Team otherTeam in enemyTeams)
             {
-                return new UnitBase[0];
+                enemyUnits.AddRange(otherTeam.Units);
             }
-            return enemyTeams.SelectMany(team => team.Units).ToArray();
+            return enemyUnits.ToArray();
         }
 
         public UnitBase GetNearestEnemyUnit(Vector3 point, float distance = float.MaxValue)
