@@ -5,7 +5,7 @@ using UnityEngine;
 public class PathNode : MonoBehaviour {
 
 	[SerializeField]
-	PathNode nextNode = null;
+	private PathNode nextNode = null;
 
 	GameObject GetNextNode () 
 	{

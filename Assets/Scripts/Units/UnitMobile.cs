@@ -22,6 +22,17 @@ namespace Units
             moveTarget = newMoveTarget;
         }
 
+        protected override void Start()
+        {
+            base.Start();
+
+            Vector3[] path = iTweenPath.GetPath("MovingUnitPath");
+
+            Debug.Log(path);
+
+            iTween.MoveTo(gameObject, iTween.Hash("path", path, "time", 5));
+        }
+
 		protected void Update()
         {
             if (!IsDead)
