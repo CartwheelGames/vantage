@@ -54,8 +54,7 @@ namespace Teams
     {
         public TeamData teamData { get; private set; }
         private Team[] enemyTeams = null;
-        private List<UnitBase> units = new List<UnitBase>();
-        public UnitBase[] Units {get{ return Units.ToArray();}}
+        public List<UnitBase> units = new List<UnitBase>();
 
         public Team(TeamData data)
         {
@@ -74,30 +73,17 @@ namespace Teams
                 units.Add(unit);
             }
         }
-        public UnitBase[] GetEnemyUnits()
-        {
-            List<UnitBase> enemyUnits = new List<UnitBase>();
-            foreach (Team otherTeam in enemyTeams)
-            {
-                enemyUnits.AddRange(otherTeam.Units);
-            }
-            return enemyUnits.ToArray();
-        }
 
         public UnitBase GetNearestEnemyUnit(Vector3 point, float distance = float.MaxValue)
         {
-            UnitBase[] enemies = GetEnemyUnits();
             UnitBase nearestEnemy = null;
-            if (enemies.Length > 0)
+            foreach (UnitBase enemy in enemyTeams[0].units)
             {
-                foreach (UnitBase enemy in enemies)
+                float currentDistance = Vector3.Distance(point, enemy.transform.position);
+                if (currentDistance < distance)
                 {
-                    float currentDistance = Vector3.Distance(point, enemy.transform.position);
-                    if (currentDistance < distance)
-                    {
-                        distance = currentDistance;
-                        nearestEnemy = enemy;
-                    }
+                    distance = currentDistance;
+                    nearestEnemy = enemy;
                 }
             }
             return nearestEnemy;
