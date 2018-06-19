@@ -34,30 +34,34 @@ namespace Units
             
             if (!IsDead && MyTeam != null)
             {
-                UnitBase newTarget = MyTeam.GetNearestEnemyUnit(transform.position);
-
-                if (newTarget != null && newTarget != target)
-                {
-                    target = newTarget;
-                    Debug.Log(target.name);
-                }
-
-                if (target != null)
-                {
-                    PointGunsAtTarget();
-                }
+                UpdateTarget();
+                FireGunsAtTarget();
             }
         }
 
-        private void PointGunsAtTarget()
+        private void UpdateTarget()
         {
-            foreach (GunBase gun in guns)
-            {
-                gun.PointAt(target.transform.position);
+            UnitBase newTarget = MyTeam.GetNearestEnemyUnit(transform.position);
 
-                if (gun.GetIsAimedAtTarget(target.gameObject))
+            if (newTarget != null && newTarget != target)
+            {
+                target = newTarget;
+            }   
+        }
+
+        private void FireGunsAtTarget()
+        {
+
+            if (target != null)
+            {
+                foreach (GunBase gun in guns)
                 {
-                    gun.FireProjectile();
+                    gun.PointAt(target.transform.position);
+
+                    if (gun.GetIsAimedAtTarget(target.gameObject))
+                    {
+                        gun.FireProjectile();
+                    }
                 }
             }
         }
