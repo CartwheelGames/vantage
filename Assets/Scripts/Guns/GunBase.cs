@@ -81,12 +81,15 @@ namespace Guns
             //barrel.eulerAngles = new Vector3(pitch, 0, 0);
             //transform.eulerAngles = new Vector3(0, pivot, 0);
             Vector3 dir = (point - transform.position).normalized;
-            Quaternion lookRotation = Quaternion.LookRotation(dir);
-            Quaternion endRotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotSpeed);
-            Vector3 rotation = lookRotation.eulerAngles;
-            transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+            if (dir != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(dir);
+                Quaternion endRotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotSpeed);
+                Vector3 rotation = lookRotation.eulerAngles;
+                transform.rotation = Quaternion.Euler(0f, rotation.y, 0f);
 
-            barrel.rotation = Quaternion.Slerp(barrel.rotation, lookRotation, Time.deltaTime * rotSpeed);
+                barrel.rotation = Quaternion.Slerp(barrel.rotation, lookRotation, Time.deltaTime * rotSpeed);
+            }
         }
 
         public bool GetIsAimedAtTarget(GameObject target)
