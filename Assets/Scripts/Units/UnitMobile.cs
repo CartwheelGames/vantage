@@ -14,59 +14,61 @@ namespace Units
         private float rotSpeed = 1f;
         [SerializeField]
         private float scatterDistance = 25f;
+        [SerializeField]
+        private string pathName = "MovingUnitPath";
+        [SerializeField]
+        private int moveDuration = 100;
 
-        private UnitBase moveTarget = null;
-
-        public void setMoveTarget(UnitBase newMoveTarget)
-        {
-            moveTarget = newMoveTarget;
-        }
+        private UnitBase target = null;
+          
 
         protected override void Start()
         {
             base.Start();
 
-            Vector3[] path = iTweenPath.GetPath("MovingUnitPath");
-
-            Debug.Log(path);
-
-            iTween.MoveTo(gameObject, iTween.Hash("path", path, "time", 5));
+            MoveAlongPath();
         }
 
-		protected void Update()
+        protected void Update()
         {
-            if (!IsDead)
+            
+            if (!IsDead && MyTeam != null)
             {
-                Vector3 myPos = transform.position;
-                if (moveTarget != null)
+                UnitBase newTarget = MyTeam.GetNearestEnemyUnit(transform.position);
+
+                if (newTarget != null && newTarget != target)
                 {
-                    Vector3 targetPos = moveTarget.transform.position;
-                    float distanceToTarget = Vector3.Distance(targetPos, myPos);
-                    Vector3 direction;
-                    if (distanceToTarget > scatterDistance)
-                    {
-                        direction = (targetPos - myPos).normalized;
-                    }
-                    else
-                    {
-                        direction = (myPos - targetPos).normalized;
-                    }
-					Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.up);
-					transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotSpeed);
-					transform.Translate(transform.forward * Time.deltaTime * speed);
-                    foreach (GunBase gun in guns)
-                    {
-                        if (gun.GetIsAimedAtTarget(moveTarget.gameObject))
-                        {
-                            gun.FireProjectile();
-                        }
-                    }
+                    target = newTarget;
+                    Debug.Log(target.name);
+                }
+
+                if (target != null)
+                {
+                    PointGunsAtTarget();
                 }
             }
-            else
+        }
+
+        private void PointGunsAtTarget()
+        {
+            foreach (GunBase gun in guns)
             {
-                transform.Translate(Vector3.down);
+                gun.PointAt(target.transform.position);
+
+                if (gun.GetIsAimedAtTarget(target.gameObject))
+                {
+                    gun.FireProjectile();
+                }
             }
         }
+
+        private void MoveAlongPath()
+        {
+            Vector3[] path = iTweenPath.GetPath(pathName);
+            iTween.MoveTo(gameObject, iTween.Hash("path", path, "time", moveDuration, "orientToPath", true, "looktime", 1));
+
+        }
+      
     }
+
 }

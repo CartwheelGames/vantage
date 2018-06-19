@@ -1364,6 +1364,57 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1160451543}
   m_Script: {fileID: 11500000, guid: 0010a04f6b0184a0db8d06d836a592b6, type: 3}
+--- !u!1 &1224957443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1224957444}
+  - component: {fileID: 1224957445}
+  m_Layer: 0
+  m_Name: Path
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1224957444
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1224957443}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1474021538}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1224957445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1224957443}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01bffa8aa898b437183cd5617f7b5303, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pathName: MovingUnitPath
+  pathColor: {r: 0, g: 1, b: 1, a: 1}
+  nodes:
+  - {x: -138.14111, y: 0, z: 0}
+  - {x: 33.675446, y: 0, z: -70.7883}
+  - {x: -2.786728, y: 0, z: -0.65219116}
+  - {x: 0, y: 0, z: 107.94052}
+  nodeCount: 4
+  initialized: 1
+  initialName: New Path 1
+  pathVisible: 1
 --- !u!1 &1256703105
 GameObject:
   m_ObjectHideFlags: 0
@@ -1581,6 +1632,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 90930791}
+  - {fileID: 1224957444}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1899,7 +1951,7 @@ Transform:
   m_GameObject: {fileID: 1922855645}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 6.155523}
   m_Children: []
   m_Father: {fileID: 1962135520}
   m_RootOrder: 0
@@ -1923,6 +1975,8 @@ MonoBehaviour:
   speed: 1
   rotSpeed: 1
   scatterDistance: 25
+  pathName: MovingUnitPath
+  moveDuration: 100
 --- !u!1001 &1930108931
 Prefab:
   m_ObjectHideFlags: 0
