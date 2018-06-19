@@ -47,6 +47,7 @@ namespace Teams
         public TeamData teamData { get; private set; }
         private Team[] enemyTeamData = null;
         private List<UnitBase> units = new List<UnitBase>();
+        public UnitBase[] Units {get{ return Units.ToArray();}}
 
         public Team(TeamData data)
         {
@@ -64,6 +65,10 @@ namespace Teams
             {
                 units.Add(unit);
             }
+        }
+        public UnitBase[] GetEnemyUnits()
+        {
+            return enemyTeamData.SelectMany(team => team.Units) as UnitBase[];
         }
     }
 }
