@@ -70,5 +70,21 @@ namespace Teams
         {
             return enemyTeamData.SelectMany(team => team.Units) as UnitBase[];
         }
+
+        public UnitBase GetNearestEnemyUnit(Vector3 point, float distance = float.MaxValue)
+        {
+            UnitBase[] enemies = GetEnemyUnits();
+            UnitBase nearestEnemy = null;
+            foreach (UnitBase enemy in enemies)
+            {
+                float currentDistance = Vector3.Distance(point, enemy.transform.position);
+                if (currentDistance < distance)
+                {
+                    distance = currentDistance;
+                    nearestEnemy = enemy;
+                }
+            }
+            return nearestEnemy;
+        }
     }
 }
