@@ -24,12 +24,14 @@ namespace Teams
                     if (unit.MyTeamData == teamData[i])
                     {
                         teams[i].AddUnit(unit);
+                        unit.Setup(teams[i]);
                     }
                 }
             }
             foreach (Team team in teams)
             {
-                Team[] enemies = teams.Where(t => t != team) as Team[];
+                Team[] enemies = teams.Where(t => t != team).ToArray();
+                Debug.Log(teams.Where(t => t != team));
                 team.SetEnemies(enemies);
                 foreach (UnitSpawner spawner in spawners)
                 {
@@ -45,7 +47,7 @@ namespace Teams
     public class Team
     {
         public TeamData teamData { get; private set; }
-        private Team[] enemyTeamData = null;
+        private Team[] enemyTeams = null;
         private List<UnitBase> units = new List<UnitBase>();
         public UnitBase[] Units {get{ return Units.ToArray();}}
 
@@ -56,7 +58,7 @@ namespace Teams
 
         public void SetEnemies(Team[] enemies)
         {
-            enemyTeamData = enemies;
+            enemyTeams = enemies;
         }
 
         public void AddUnit(UnitBase unit)
@@ -68,20 +70,27 @@ namespace Teams
         }
         public UnitBase[] GetEnemyUnits()
         {
-            return enemyTeamData.SelectMany(team => team.Units) as UnitBase[];
+            if (enemyTeams == null || enemyTeams.Length == 0)
+            {
+                return new UnitBase[0];
+            }
+            return enemyTeams.SelectMany(team => team.Units).ToArray();
         }
 
         public UnitBase GetNearestEnemyUnit(Vector3 point, float distance = float.MaxValue)
         {
             UnitBase[] enemies = GetEnemyUnits();
             UnitBase nearestEnemy = null;
-            foreach (UnitBase enemy in enemies)
+            if (enemies.Length > 0)
             {
-                float currentDistance = Vector3.Distance(point, enemy.transform.position);
-                if (currentDistance < distance)
+                foreach (UnitBase enemy in enemies)
                 {
-                    distance = currentDistance;
-                    nearestEnemy = enemy;
+                    float currentDistance = Vector3.Distance(point, enemy.transform.position);
+                    if (currentDistance < distance)
+                    {
+                        distance = currentDistance;
+                        nearestEnemy = enemy;
+                    }
                 }
             }
             return nearestEnemy;

@@ -31,7 +31,6 @@ namespace Units
 
         protected void Update()
         {
-            
             if (!IsDead && MyTeam != null)
             {
                 UpdateTarget();
